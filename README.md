@@ -1,6 +1,6 @@
-# CodeHub
+# 🚀 CodeHub
 
-A unified dashboard for competitive programmers.
+CodeHub is a Competitive Programming Dashboard.
 
 ## Features
 
@@ -10,3 +10,15 @@ A unified dashboard for competitive programmers.
 - AtCoder Dashboard
 - Contest Calendar
 - Contest Notifications
+- Responsive UI
+- JavaScript DOM
+
+## Technologies
+
+- HTML
+- CSS
+- JavaScript
+
+## Author
+
+Venkat

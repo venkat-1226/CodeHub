@@ -3,17 +3,16 @@
     padding:0;
     box-sizing:border-box;
 }
+
 body{
 
-    padding:40px;
-
-    font-family:Verdana, sans-serif;
+    font-family:Verdana,sans-serif;
 
     background:#7acdcd;
 
-}
+    padding:40px;
 
-/* Container */
+}
 
 .container{
 
@@ -22,8 +21,6 @@ body{
     margin:auto;
 
 }
-
-/* Sections */
 
 .section{
 
@@ -39,47 +36,35 @@ body{
 
 }
 
-/* Header */
-
 .hero{
 
     text-align:center;
-    padding:40px 20px;
 
 }
 
 .hero h1{
 
     color:#2563eb;
+
     font-size:48px;
-    margin-bottom:10px;
+
+    margin-bottom:15px;
 
 }
 
 .hero p{
 
     font-size:22px;
-    margin-top:15px;
-    line-height:1.5;
 
 }
-
-/* Headings */
 
 h2{
 
     color:#1e3a8a;
-     margin-bottom:25px;
+
+    margin-bottom:20px;
 
 }
-
-.green-heading{
-
-    color:green;
-
-}
-
-/* Platform Cards */
 
 .platform-container{
 
@@ -87,11 +72,9 @@ h2{
 
     justify-content:center;
 
-    gap:20px;
-
     flex-wrap:wrap;
 
-    margin-top:20px;
+    gap:20px;
 
 }
 
@@ -102,6 +85,7 @@ h2{
     height:220px;
 
     background:linear-gradient(135deg,#2563eb,#1d4ed8);
+
     color:white;
 
     border-radius:12px;
@@ -114,7 +98,7 @@ h2{
 
     padding:20px;
 
-    transition:all .3s ease;
+    transition:.3s;
 
 }
 
@@ -122,46 +106,33 @@ h2{
 
     transform:translateY(-8px) scale(1.03);
 
-    box-shadow:0 12px 20px rgba(0,0,0,.25);
-
-}
-
-.platform-card h3{
-
-    margin:0;
+    box-shadow:0 12px 20px rgba(0,0,0,.2);
 
 }
 
 .platform-card p{
 
-    font-size:18px;
-
     font-weight:bold;
-
-    margin:0;
 
 }
 
-/* Buttons */
-
 .view-btn{
 
-    padding:12px 18px;
+    padding:12px;
 
     border:none;
 
     border-radius:8px;
 
-    background:white;
-
-    color:#2563eb;
-
     cursor:pointer;
 
     font-weight:bold;
 
+    background:white;
+
+    color:#2563eb;
+
     transition:.3s;
-    box-shadow:0 4px 10px rgba(0,0,0,.15);
 
 }
 
@@ -173,26 +144,21 @@ h2{
 
 }
 
-/* Table */
-
 table{
 
     width:100%;
 
-    margin-top:20px;
-
     border-collapse:collapse;
+
+    margin-top:20px;
 
 }
 
-th,
-td{
+th,td{
 
     border:1px solid #ddd;
 
     padding:15px;
-
-    text-align:left;
 
 }
 
@@ -203,11 +169,12 @@ th{
     color:white;
 
 }
-tr:hover{
-    background:#f3f4f6;
-}
 
-/* List */
+tr:hover{
+
+    background:#f3f4f6;
+
+}
 
 ol{
 
@@ -217,21 +184,15 @@ ol{
 
 li{
 
-    font-size:20px;
-
-    color:#374151;
-
-    margin-bottom:8px;
+    margin-bottom:10px;
 
 }
 
-/* Responsive */
-
-@media (max-width:768px){
+@media(max-width:768px){
 
     body{
 
-        margin:20px;
+        padding:20px;
 
     }
 
@@ -243,7 +204,4 @@ li{
 
     }
 
-}
-html{
-    scroll-behavior:smooth;
 }

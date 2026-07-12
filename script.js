@@ -1,122 +1,72 @@
-// ======================================
-// 🚀 CodeHub Dashboard
-// Developed by Venkat
-// ======================================
-
 console.log("🚀 Welcome to CodeHub!");
 
-// --------------------------------------
-// Application Information
-// --------------------------------------
+const platforms = [
+    {
+        icon: "🟡",
+        name: "LeetCode",
+        rating: 1650,
+        solved: 540,
+        url: "https://leetcode.com"
+    },
+    {
+        icon: "🔵",
+        name: "Codeforces",
+        rating: 1550,
+        solved: 220,
+        url: "https://codeforces.com"
+    },
+    {
+        icon: "⭐",
+        name: "CodeChef",
+        rating: 1800,
+        solved: 310,
+        url: "https://www.codechef.com"
+    },
+    {
+        icon: "🔴",
+        name: "AtCoder",
+        rating: 1450,
+        solved: 150,
+        url: "https://atcoder.jp"
+    }
+];
 
-const appName = "CodeHub";
-const developer = "Venkat";
+const container = document.getElementById("platform-container");
 
-console.log(`Application : ${appName}`);
-console.log(`Developer   : ${developer}`);
+platforms.forEach((platform) => {
 
-// --------------------------------------
-// User Information
-// --------------------------------------
+    // Create Card
+    const card = document.createElement("div");
+    card.className = "platform-card";
 
-let userName = "Venkat";
-let isPremium = true;
+    // Platform Name
+    const title = document.createElement("h3");
+    title.textContent = `${platform.icon} ${platform.name}`;
 
-console.log(`User        : ${userName}`);
-console.log(`Premium     : ${isPremium}`);
+    // Rating
+    const rating = document.createElement("p");
+    rating.innerHTML = `<strong>Rating:</strong> ${platform.rating}`;
 
-// --------------------------------------
-// Platform Data
-// --------------------------------------
+    // Solved
+    const solved = document.createElement("p");
+    solved.innerHTML = `<strong>Solved:</strong> ${platform.solved}`;
 
-let leetcodeRating = 1650;
-let leetcodeSolved = 540;
+    // Button
+    const button = document.createElement("button");
+    button.className = "view-btn";
+    button.textContent = "View Profile";
 
-let codeforcesRating = 1550;
-let codeforcesSolved = 220;
-
-let codechefRating = 1800;
-let codechefSolved = 310;
-
-let atcoderRating = 1450;
-let atcoderSolved = 150;
-
-// --------------------------------------
-// DOM Functions
-// --------------------------------------
-
-function updateTitle(title) {
-    document.getElementById("title").textContent = title;
-}
-
-function updateRating(id, rating) {
-    document.getElementById(id).textContent = rating;
-}
-
-function updateSolved(id, solved) {
-    document.getElementById(id).textContent = solved;
-}
-
-// --------------------------------------
-// Update Dashboard
-// --------------------------------------
-
-updateTitle("🚀 CodeHub Dashboard");
-
-updateRating("leetcode-rating", leetcodeRating);
-updateRating("codeforces-rating", codeforcesRating);
-updateRating("codechef-rating", codechefRating);
-updateRating("atcoder-rating", atcoderRating);
-
-updateSolved("leetcode-solved", leetcodeSolved);
-updateSolved("codeforces-solved", codeforcesSolved);
-updateSolved("codechef-solved", codechefSolved);
-updateSolved("atcoder-solved", atcoderSolved);
-
-// --------------------------------------
-// Button Events
-// --------------------------------------
-
-function openWebsite(buttonId, url) {
-
-    const button = document.getElementById(buttonId);
-
-    button.addEventListener("click", function () {
-
-        window.open(url, "_blank");
-
+    button.addEventListener("click", () => {
+        window.open(platform.url, "_blank");
     });
 
-}
+    // Add elements to card
+    card.appendChild(title);
+    card.appendChild(rating);
+    card.appendChild(solved);
+    card.appendChild(button);
 
-openWebsite("leetcode-btn", "https://leetcode.com");
+    // Add card to page
+    container.appendChild(card);
 
-openWebsite("codeforces-btn", "https://codeforces.com");
-
-openWebsite("codechef-btn", "https://www.codechef.com");
-
-openWebsite("atcoder-btn", "https://atcoder.jp");
-
-// --------------------------------------
-// Console Information
-// --------------------------------------
-
-console.log("====================================");
-
-console.log("Platform Ratings");
-
-console.log(`LeetCode   : ${leetcodeRating}`);
-console.log(`Codeforces : ${codeforcesRating}`);
-console.log(`CodeChef   : ${codechefRating}`);
-console.log(`AtCoder    : ${atcoderRating}`);
-
-console.log("------------------------------------");
-
-console.log("Solved Problems");
-
-console.log(`LeetCode   : ${leetcodeSolved}`);
-console.log(`Codeforces : ${codeforcesSolved}`);
-console.log(`CodeChef   : ${codechefSolved}`);
-console.log(`AtCoder    : ${atcoderSolved}`);
-
-console.log("====================================");
+});
