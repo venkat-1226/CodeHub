@@ -1,110 +1,131 @@
-// ==========================================
-// Dark Mode
-// ==========================================
-
-const themeButton = document.getElementById("theme-btn");
-
-if(localStorage.getItem("theme")==="dark"){
-
-    document.body.classList.add("dark");
-
-    themeButton.textContent="☀️ Light Mode";
-
-}
-
-themeButton.addEventListener("click",()=>{
-
-    document.body.classList.toggle("dark");
-
-    if(document.body.classList.contains("dark")){
-
-        localStorage.setItem("theme","dark");
-
-        themeButton.textContent="☀️ Light Mode";
-
-    }
-
-    else{
-
-        localStorage.setItem("theme","light");
-
-        themeButton.textContent="🌙 Dark Mode";
-
-    }
-
-});
+console.log("🚀 Welcome to CodeHub!");
 
 // ==========================================
 // Platform Data
 // ==========================================
 
-const platforms=[
+const platforms = [
 
     {
-        name:"🟡 LeetCode",
-        rating:1650,
-        solved:540,
-        username:"leetcode-user",
-        url:"https://leetcode.com/"
+        name: "🟡 LeetCode",
+        rating: 1650,
+        solved: 540,
+        username: "leetcode-user",
+        url: "https://leetcode.com/"
     },
 
     {
-        name:"🔵 Codeforces",
-        rating:1550,
-        solved:220,
-        username:"codeforces-user",
-        url:"https://codeforces.com/profile/"
+        name: "🔵 Codeforces",
+        rating: 1550,
+        solved: 220,
+        username: "codeforces-user",
+        url: "https://codeforces.com/profile/"
     },
 
     {
-        name:"⭐ CodeChef",
-        rating:1800,
-        solved:310,
-        username:"codechef-user",
-        url:"https://www.codechef.com/users/"
+        name: "⭐ CodeChef",
+        rating: 1800,
+        solved: 310,
+        username: "codechef-user",
+        url: "https://www.codechef.com/users/"
     },
 
     {
-        name:"🔴 AtCoder",
-        rating:1450,
-        solved:150,
-        username:"atcoder-user",
-        url:"https://atcoder.jp/users/"
+        name: "🔴 AtCoder",
+        rating: 1450,
+        solved: 150,
+        username: "atcoder-user",
+        url: "https://atcoder.jp/users/"
     }
 
 ];
 
 // ==========================================
-// Create Cards
+// Platform Cards
 // ==========================================
 
-const container=document.getElementById("platform-container");
+const container = document.getElementById("platform-container");
 
-container.innerHTML="";
+function displayPlatforms(platformList){
 
-platforms.forEach(platform=>{
+    container.innerHTML = "";
 
-    container.innerHTML+=`
+    platformList.forEach(platform => {
 
-    <div class="platform-card">
+        container.innerHTML += `
 
-        <h3>${platform.name}</h3>
+        <div class="platform-card">
 
-        <p><strong>Rating:</strong> ${platform.rating}</p>
+            <h3>${platform.name}</h3>
 
-        <p><strong>Solved:</strong> ${platform.solved}</p>
+            <p><strong>Rating:</strong> ${platform.rating}</p>
 
-        <button
-            class="view-btn"
-            onclick="openProfile('${platform.username}','${platform.url}')">
+            <p><strong>Solved:</strong> ${platform.solved}</p>
 
-            View Profile
+            <button
+                class="view-btn"
+                onclick="openProfile('${platform.username}','${platform.url}')">
 
-        </button>
+                View Profile
 
-    </div>
+            </button>
 
-    `;
+        </div>
+
+        `;
+
+    });
+
+}
+
+displayPlatforms(platforms);
+
+// ==========================================
+// Dashboard Statistics
+// ==========================================
+
+// Total Platforms
+
+document.getElementById("total-platforms").textContent =
+    platforms.length;
+
+// Highest Rating
+
+const highestRating = Math.max(
+
+    ...platforms.map(platform => platform.rating)
+
+);
+
+document.getElementById("highest-rating").textContent =
+    highestRating;
+
+// Total Solved
+
+const totalSolved = platforms.reduce(
+
+    (total, platform) => total + platform.solved,0);
+
+document.getElementById("total-solved").textContent =
+    totalSolved;
+
+// ==========================================
+// Search
+// ==========================================
+
+const searchBox = document.getElementById("search-box");
+
+searchBox.addEventListener("input", () => {
+
+    const searchText = searchBox.value.toLowerCase();
+
+    const filteredPlatforms = platforms.filter(platform =>
+
+        platform.name.toLowerCase().includes(searchText)
+
+    );
+
+    displayPlatforms(filteredPlatforms);
 
 });
 
@@ -112,11 +133,11 @@ platforms.forEach(platform=>{
 // Open Profile
 // ==========================================
 
-function openProfile(inputId,baseUrl){
+function openProfile(inputId, baseUrl){
 
-    const username=document.getElementById(inputId).value.trim();
+    const username = document.getElementById(inputId).value.trim();
 
-    if(username===""){
+    if(username === ""){
 
         alert("Please enter your username first.");
 
@@ -124,11 +145,12 @@ function openProfile(inputId,baseUrl){
 
     }
 
-    window.open(baseUrl+username,"_blank");
+    window.open(baseUrl + username, "_blank");
 
 }
+
 // ==========================================
-// Save Usernames
+// Save Profile
 // ==========================================
 
 const saveButton = document.getElementById("save-btn");
@@ -151,11 +173,12 @@ saveButton.addEventListener("click", () => {
 
     localStorage.setItem("profile", JSON.stringify(profile));
 
-    alert("Profile Saved Successfully!");
+    alert("✅ Profile Saved Successfully!");
 
 });
+
 // ==========================================
-// Load Saved Usernames
+// Load Profile
 // ==========================================
 
 const savedProfile = JSON.parse(localStorage.getItem("profile"));
@@ -173,3 +196,39 @@ if(savedProfile){
     document.getElementById("college").value = savedProfile.college;
 
 }
+
+// ==========================================
+// Dark Mode
+// ==========================================
+
+const themeButton = document.getElementById("theme-btn");
+
+if(localStorage.getItem("theme") === "dark"){
+
+    document.body.classList.add("dark");
+
+    themeButton.textContent = "☀️ Light Mode";
+
+}
+
+themeButton.addEventListener("click", () => {
+
+    document.body.classList.toggle("dark");
+
+    if(document.body.classList.contains("dark")){
+
+        localStorage.setItem("theme", "dark");
+
+        themeButton.textContent = "☀️ Light Mode";
+
+    }
+
+    else{
+
+        localStorage.setItem("theme", "light");
+
+        themeButton.textContent = "🌙 Dark Mode";
+
+    }
+
+});
