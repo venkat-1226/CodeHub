@@ -1,4 +1,43 @@
-console.log("🚀 Welcome to CodeHub!");
+console.log("📊 Welcome to AlgoTrack!");
+// ==========================================
+// Toast Notification
+// ==========================================
+
+function showToast(message,type="success"){
+
+    const toast=document.getElementById("toast");
+
+    toast.textContent=message;
+
+    toast.className="";
+
+    toast.classList.add(type);
+
+    toast.classList.add("show");
+
+    setTimeout(()=>{
+
+        toast.classList.remove("show");
+
+    },3000);
+
+}
+
+// ==========================================
+// Loading Spinner
+// ==========================================
+
+function showLoader(){
+
+    document.getElementById("loader").style.display = "flex";
+
+}
+
+function hideLoader(){
+
+    document.getElementById("loader").style.display = "none";
+
+}
 
 // ==========================================
 // Platform Data
@@ -7,12 +46,13 @@ console.log("🚀 Welcome to CodeHub!");
 const platforms = [
 
     {
-        id: "leetcode",
-        name: "🟡 LeetCode",
-        rating: "--",
-        solved: "--",
-        url: "https://leetcode.com/"
-    },
+    id: "leetcode",
+    name: "🟡 LeetCode",
+    username: "",
+    rating: "--",
+    solved: "--",
+    url: "https://leetcode.com/u/"
+},
 
     {
         id: "codeforces",
@@ -173,7 +213,7 @@ function attachProfileButtons(){
             }
 
             if(username === ""){
-                alert("Please enter your username first.");
+                showToast("Please enter your username first.","error");
                 return;
             }
 
@@ -243,7 +283,7 @@ document.getElementById("save-btn").addEventListener("click",()=>{
 
     localStorage.setItem("profile",JSON.stringify(profile));
 
-    alert("✅ Profile Saved Successfully!");
+    showToast("✅ Profile Saved Successfully!");
 
 });
 
@@ -278,24 +318,33 @@ themeButton.addEventListener("click",()=>{
 
 });
 
-document.getElementById("load-btn").addEventListener("click",loadCodeforcesProfile);
+document.getElementById("load-btn")
+.addEventListener("click", () => {
+
+    loadCodeforcesProfile();
+
+    //loadLeetCodeProfile();
+
+});
 
 async function loadCodeforcesProfile(){
 
     const username=document.getElementById("codeforces-user").value.trim();
 
     if(username===""){
-        alert("Please enter your Codeforces username.");
+        showToast("Enter Codeforces username","error");
         return;
     }
 
     try{
 
+        showLoader();
+
         const response=await fetch(`https://codeforces.com/api/user.info?handles=${username}`);
         const data=await response.json();
 
         if(data.status!=="OK"){
-            alert("Codeforces user not found.");
+            showToast("User not found","error");
             return;
         }
 
@@ -309,31 +358,80 @@ async function loadCodeforcesProfile(){
         updateStatistics();
         updateProgress();
         drawChart();
+        updateLeaderboard();
 
         document.getElementById("codeforces-profile").onclick=()=>{
             window.open(`https://codeforces.com/profile/${user.handle}`,"_blank");
         };
 
-        alert("✅ Codeforces profile loaded successfully!");
+        hideLoader();
+
+        showToast("Codeforces profile loaded!");
 
     }catch(error){
 
         console.error(error);
-        alert("Unable to connect to Codeforces API.");
+
+        hideLoader();
+
+        showToast("Unable to connect to Codeforces API","error");
 
     }
 
 }
 
+// ==========================================
+// Load LeetCode Profile
+// ==========================================
+
+/* async function loadLeetCodeProfile(){
+
+    const username = document
+        .getElementById("leetcode-user")
+        .value
+        .trim();
+
+    if(username === ""){
+
+        alert("Please enter your LeetCode username.");
+
+        return;
+
+    }
+
+    alert(
+        "We'll connect the live LeetCode API in the next step. " +
+        "For now, we'll simulate the data."
+    );
+
+    platforms[0].rating = 1650;
+
+    platforms[0].solved = 420;
+
+    displayPlatforms(platforms);
+
+    updateStatistics();
+
+    updateProgress();
+
+    drawChart();
+    updateLeaderboard();
+
+} */
+
 function initializeApp(){
 
     displayPlatforms(platforms);
+
     updateStatistics();
+
     updateProgress();
 
-}
+    drawChart();
 
-initializeApp();
+    updateLeaderboard();
+
+}
 
 // ==========================================
 // Rating Graph
@@ -402,7 +500,11 @@ function drawChart(){
 
 }
 
-drawChart();
+
+initializeApp();
+
+
+
 
 // ==========================================
 // Upcoming Contests
@@ -471,3 +573,87 @@ async function loadContests(){
     }
 
 }
+// ==========================================
+// Leaderboard
+// ==========================================
+
+function updateLeaderboard(){
+
+    const board = document.getElementById("leaderboard");
+
+    board.innerHTML = "";
+
+    const sortedPlatforms = [...platforms].sort(
+
+        (a,b)=>
+
+        (Number(b.rating)||0) -
+
+        (Number(a.rating)||0)
+
+    );
+
+    sortedPlatforms.forEach((platform,index)=>{
+
+        let medal="";
+
+        if(index===0){
+
+            medal="🥇";
+
+        }
+
+        else if(index===1){
+
+            medal="🥈";
+
+        }
+
+        else if(index===2){
+
+            medal="🥉";
+
+        }
+
+        else{
+
+            medal=(index+1)+"️⃣";
+
+        }
+
+        board.innerHTML += `
+
+        <div class="leaderboard-item">
+
+            <span>
+
+                ${medal} ${platform.name}
+
+            </span>
+
+            <strong>
+
+                ${platform.rating}
+
+            </strong>
+
+        </div>
+
+        `;
+
+    });
+
+}
+// ==========================================
+// Reset Profile
+// ==========================================
+
+document
+.getElementById("reset-btn")
+.addEventListener("click",()=>{
+
+    localStorage.removeItem("profile");
+
+    location.reload();
+
+});

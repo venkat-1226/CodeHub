@@ -1,24 +1,58 @@
-# 🚀 CodeHub
+# 📊 AlgoTrack
 
-CodeHub is a Competitive Programming Dashboard.
+> Track • Analyze • Improve
 
-## Features
+AlgoTrack is a Competitive Programming Dashboard that allows users to manage multiple coding platform profiles from a single interface.
 
-- LeetCode Dashboard
-- Codeforces Dashboard
-- CodeChef Dashboard
-- AtCoder Dashboard
+---
+
+## ✨ Features
+
+- 🌙 Dark / Light Mode
+- 👤 Save & Load User Profiles
+- 🔍 Platform Search
+- 📈 Dashboard Statistics
+- 📊 Rating Graph (Chart.js)
+- 🏆 Platform Leaderboard
+- 📉 Progress Tracker
+- 🔔 Toast Notifications
+- ⏳ Loading Spinner
+- 🌐 Codeforces API Integration
+
+---
+
+## 🛠 Technologies Used
+
+- HTML5
+- CSS3
+- JavaScript (ES6)
+- Chart.js
+- LocalStorage
+- Fetch API
+
+---
+
+## 📸 Screenshots
+
+(Add screenshots here)
+
+---
+
+## 🚀 Future Improvements
+
+- LeetCode Integration
+- CodeChef Integration
+- AtCoder Integration
 - Contest Calendar
-- Contest Notifications
-- Responsive UI
-- JavaScript DOM
+- GitHub Analytics
+- React Version
+- Node.js Backend
 
-## Technologies
+---
 
-- HTML
-- CSS
-- JavaScript
+## 👨‍💻 Author
 
-## Author
+Venkat Madduri
 
-Venkat
+GitHub:
+https://github.com/yourusername
